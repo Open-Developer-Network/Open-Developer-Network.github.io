@@ -34,8 +34,10 @@ jobs:
 
       - name: Build Static Export
         working-directory: ./application
-        run: npm run build
-
+        run: |
+          npm run build
+          touch out/.nojekyll
+          
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
