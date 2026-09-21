@@ -24,19 +24,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
+          cache-dependency-path: application/package-lock.json
 
       - name: Install Dependencies
+        working-directory: ./application
         run: npm ci
 
       - name: Build Static Export
+        working-directory: ./application
         run: npm run build
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './out'
+          path: './application/out'
 
   deploy:
     environment:
